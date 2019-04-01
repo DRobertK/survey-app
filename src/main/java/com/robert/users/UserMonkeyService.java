@@ -26,12 +26,12 @@ public class UserMonkeyService {
     public UserMonkey findById(Long id) {
         return userMonkeyRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
     }
-//
-//    public UserMonkey update(UserMonkey userMonkey) {
-//        return userMonkeyRepository.save(userMonkey);
-//    }
-//
-//    public void deleteById(Long id) {
-//        userMonkeyRepository.deleteById(id);
-//    }
+
+    public UserMonkey update(UserMonkey userMonkey) {
+        return userMonkeyRepository.save(userMonkey);
+    }
+
+    public void deleteById(Long id) {
+        userMonkeyRepository.deleteById(id);
+    }
 }

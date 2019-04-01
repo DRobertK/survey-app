@@ -2,15 +2,15 @@ package com.robert.users;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/userMonkey")
 public class UserMonkeyController {
+
+    // TODO: 0. add logger and log messages in controller
 
     private UserMonkeyService userMonkeyService;
 
@@ -25,27 +25,28 @@ public class UserMonkeyController {
         return userMonkeyService.findAll();
     }
 
+    // TODO: 1. fix user CRUD
     //find one
-    @GetMapping
+    @GetMapping({"/id"})
     public UserMonkey findById(Long id) {
         return userMonkeyService.findById(id);
     }
 //
 //    //create
-//    @PostMapping
-//    public void create(UserMonkey userMonkey) {
-//        userMonkeyService.save(userMonkey);
-//    }
-//
-//    //update
-//    @PutMapping
-//    public UserMonkey update(UserMonkey userMonkey) {
-//        return userMonkeyService.save(userMonkey);
-//    }
-//
+@PostMapping
+public void create(UserMonkey userMonkey) {
+    userMonkeyService.save(userMonkey);
+}
+
+    //update
+    @PutMapping
+    public UserMonkey update(UserMonkey userMonkey) {
+        return userMonkeyService.save(userMonkey);
+    }
+
 //    //delete
-//    @DeleteMapping
-//    public void deleteById(Long id) {
-//        userMonkeyService.deleteById(id);
-//    }
+@DeleteMapping({"/id"})
+public void deleteById(Long id) {
+    userMonkeyService.deleteById(id);
+}
 }
