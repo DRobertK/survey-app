@@ -29,17 +29,14 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter')
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-    implementation('org.springframework.boot:spring-boot-starter-data-rest')
+  //  implementation('org.springframework.boot:spring-boot-starter-data-rest')
 //    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation('org.apache.tomcat:tomcat-dbcp:9.0.13')
 
     implementation "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor"org.projectlombok:lombok:${lombokVersion}"
     
     runtimeOnly('com.h2database:h2')
     runtimeOnly('mysql:mysql-connector-java')
-
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
 
     testImplementation "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor"org.projectlombok:lombok:${lombokVersion}"

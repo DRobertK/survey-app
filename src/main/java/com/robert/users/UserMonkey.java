@@ -1,11 +1,11 @@
-package com.robert;
+package com.robert.users;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "user")
+@Entity(name = "user_monkey")
 public class UserMonkey {
 
     @Id
@@ -15,7 +15,7 @@ public class UserMonkey {
     private String lastName;
     private String emailAddress;
     private String city;
-    private String Country;
+    private String country;
 
 
     public UserMonkey(String firstName, String lastName, String emailAddress, String city, String country) {
@@ -23,7 +23,7 @@ public class UserMonkey {
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.city = city;
-        Country = country;
+        this.country = country;
     }
 
     public int getId() {
@@ -67,11 +67,11 @@ public class UserMonkey {
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
     public void setCountry(String country) {
-        Country = country;
+        this.country = country;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class UserMonkey {
                 ", lastName='" + lastName + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", city='" + city + '\'' +
-                ", Country='" + Country + '\'' +
+                ", country='" + country + '\'' +
                 '}';
     }
 }
