@@ -31,12 +31,12 @@ public class UserMonkeyController {
     public UserMonkey findById(Long id) {
         return userMonkeyService.findById(id);
     }
-//
-//    //create
-@PostMapping
-public void create(UserMonkey userMonkey) {
-    userMonkeyService.save(userMonkey);
-}
+
+    //create
+    @PostMapping
+    public void create(UserMonkey userMonkey) {
+        userMonkeyService.save(userMonkey);
+    }
 
     //update
     @PutMapping
@@ -44,9 +44,9 @@ public void create(UserMonkey userMonkey) {
         return userMonkeyService.save(userMonkey);
     }
 
-//    //delete
-@DeleteMapping({"/id"})
-public void deleteById(Long id) {
-    userMonkeyService.deleteById(id);
-}
+    //    //delete
+    @DeleteMapping({"/id"})
+    public void deleteById(Long id) {
+        userMonkeyService.deleteById(id);
+    }
 }
