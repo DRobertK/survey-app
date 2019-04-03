@@ -25,11 +25,11 @@ public class SurveyService {
 
 
     public Survey save(Survey survey) {
-        return (Survey) surveiRepository.save(survey);
+        return surveiRepository.save(survey);
     }
 
     public Survey update(Survey survey) {
-        return (Survey) surveiRepository.save(survey);
+        return surveiRepository.save(survey);
     }
 
     public void deleteById(Long id) {

@@ -41,6 +41,7 @@ public class SurveyController {
         return surveyService.save(survey);
     }
 
+    //delete
     @DeleteMapping({"/id"})
     public void deleteById(Long id) {
         surveyService.deleteById(id);

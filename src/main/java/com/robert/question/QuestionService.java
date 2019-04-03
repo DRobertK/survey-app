@@ -1,8 +1,41 @@
 package com.robert.question;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
 public class QuestionService {
 
-    public void add(Question question) {
+    private QuestionRepository questionRepository;
 
+    @Autowired
+    public QuestionService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
     }
+
+    public Question save(Question question) {
+        return questionRepository.save(question);
+    }
+
+    public List<Question> findAll() {
+        return questionRepository.findAll();
+    }
+
+    public Question findById(long id) {
+        return questionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+    }
+
+    public Question update(Question question) {
+        return questionRepository.save(question);
+    }
+
+    public void deleteById(long id) {
+        questionRepository.deleteById(id);
+    }
+
+//    public void add(Question question) {
+//        questionRepository.save(question);
+//    }
 }
