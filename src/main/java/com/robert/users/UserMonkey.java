@@ -1,9 +1,9 @@
 package com.robert.users;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.robert.survey.Survey;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "user_monkey")
 public class UserMonkey {
@@ -17,6 +17,17 @@ public class UserMonkey {
     private String city;
     private String country;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_monkey_id", insertable = false, updatable = false)
+    public Survey survey;
+
+    public Survey getSurvey() {
+        return survey;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
 
     public UserMonkey(String firstName, String lastName, String emailAddress, String city, String country) {
         this.firstName = firstName;
@@ -72,6 +83,24 @@ public class UserMonkey {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserMonkey that = (UserMonkey) o;
+        return id == that.id &&
+                firstName.equals(that.firstName) &&
+                lastName.equals(that.lastName) &&
+                emailAddress.equals(that.emailAddress) &&
+                city.equals(that.city) &&
+                country.equals(that.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, emailAddress, city, country);
     }
 
     @Override

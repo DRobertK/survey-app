@@ -1,14 +1,13 @@
 package com.robert.survey;
 
 import com.robert.question.Question;
+import com.robert.users.UserMonkey;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "_survey")
+@Entity(name = "survey")
 public class Survey {
     //
 //    // TODO: 4. add properties
@@ -17,6 +16,16 @@ public class Survey {
     private long id;
     private String nameOfSurvey;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id")
+    Question question;
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "survey"
+    )
+//            @JoinColumn(name = "user_monkey_id",insertable = false, updatable = false)
+    private List<UserMonkey> userMonkeys = new ArrayList<>();
 
     public Survey(long id, String nameOfSurvey) {
         this.id = id;
