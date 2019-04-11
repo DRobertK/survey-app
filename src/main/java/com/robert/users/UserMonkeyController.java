@@ -1,18 +1,19 @@
 package com.robert.users;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
-@RequestMapping(value = "/userMonkey")
+@RequestMapping(value = "/users")
 public class UserMonkeyController {
 
     // TODO: 0. add logger and log messages in controller
-    private final static Logger LOGGER = Logger.getLogger(UserMonkeyController.class.getName());
+    private final static Logger logger = LoggerFactory.getLogger(UserMonkeyController.class.getName());
 
     private UserMonkeyService userMonkeyService;
 
@@ -29,8 +30,9 @@ public class UserMonkeyController {
 
     // TODO: 1. fix user CRUD
     //find one
-    @GetMapping({"/id"})
-    public UserMonkey findById(Long id) {
+    @GetMapping("/{id}")
+    public UserMonkey findById(@PathVariable final Long id) {
+        logger.debug("find by id {}", id);
         return userMonkeyService.findById(id);
     }
 

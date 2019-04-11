@@ -1,10 +1,9 @@
 package com.robert.question;
 
-import com.robert.survey.Survey;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity(name = "question")
 public class Question {
@@ -15,20 +14,14 @@ public class Question {
     private String textQuestion;
     private String textAnswer;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "question"
-    )
-//    @JoinColumn(name = "survey", insertable = false, updatable = false)
-    private List<Survey> surveys = new ArrayList<>();
+    public Question() {
+    }
 
     public Question(long id, String textQuestion, String textAnswer) {
         this.id = id;
         this.textQuestion = textQuestion;
         this.textAnswer = textAnswer;
     }
-
 
     public long getId() {
         return id;
@@ -54,11 +47,4 @@ public class Question {
         this.textAnswer = textAnswer;
     }
 
-    public List<Survey> getSurveys() {
-        return surveys;
-    }
-
-    public void setSurveys(List<Survey> surveys) {
-        this.surveys = surveys;
-    }
 }

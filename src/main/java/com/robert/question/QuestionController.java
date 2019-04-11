@@ -7,13 +7,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/question")
-public class QuestionControl {
+public class QuestionController {
 
 
     private QuestionService questionService;
 
     @Autowired
-    public QuestionControl(QuestionService questionService) {
+    public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
     }
 
@@ -29,7 +29,7 @@ public class QuestionControl {
         return questionService.findAll();
     }
 
-    @GetMapping({"/id"})
+    @GetMapping("/id")
     public Question findById(Long id) {
         return questionService.findById(id);
     }

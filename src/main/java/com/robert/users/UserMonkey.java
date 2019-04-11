@@ -3,6 +3,8 @@ package com.robert.users;
 import com.robert.survey.Survey;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "user_monkey")
@@ -17,16 +19,13 @@ public class UserMonkey {
     private String city;
     private String country;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_monkey_id", insertable = false, updatable = false)
-    private Survey survey;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Survey> surveys = new ArrayList<>();
 
-    public Survey getSurvey() {
-        return survey;
-    }
-
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
+    public UserMonkey() {
     }
 
     public UserMonkey(String firstName, String lastName, String emailAddress, String city, String country) {
@@ -83,6 +82,14 @@ public class UserMonkey {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<Survey> getSurveys() {
+        return surveys;
+    }
+
+    public void setSurveys(List<Survey> surveys) {
+        this.surveys = surveys;
     }
 
     @Override
