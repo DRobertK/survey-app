@@ -9,7 +9,6 @@ import java.util.List;
 @Entity(name = "question")
 public class Question {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -22,7 +21,7 @@ public class Question {
             mappedBy = "question"
     )
 //    @JoinColumn(name = "survey", insertable = false, updatable = false)
-            List<Survey> surveys = new ArrayList<>();
+    private List<Survey> surveys = new ArrayList<>();
 
     public Question(long id, String textQuestion, String textAnswer) {
         this.id = id;
@@ -53,5 +52,13 @@ public class Question {
 
     public void setTextAnswer(String textAnswer) {
         this.textAnswer = textAnswer;
+    }
+
+    public List<Survey> getSurveys() {
+        return surveys;
+    }
+
+    public void setSurveys(List<Survey> surveys) {
+        this.surveys = surveys;
     }
 }

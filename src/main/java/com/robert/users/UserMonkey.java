@@ -19,7 +19,7 @@ public class UserMonkey {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_monkey_id", insertable = false, updatable = false)
-    public Survey survey;
+    private Survey survey;
 
     public Survey getSurvey() {
         return survey;
@@ -113,5 +113,7 @@ public class UserMonkey {
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 '}';
+
+
     }
 }

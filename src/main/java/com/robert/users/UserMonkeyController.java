@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(value = "/userMonkey")
 public class UserMonkeyController {
 
     // TODO: 0. add logger and log messages in controller
+    private final static Logger LOGGER = Logger.getLogger(UserMonkeyController.class.getName());
 
     private UserMonkeyService userMonkeyService;
 

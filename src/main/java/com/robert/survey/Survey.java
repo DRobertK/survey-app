@@ -16,9 +16,7 @@ public class Survey {
     private long id;
     private String nameOfSurvey;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id")
-    Question question;
+    // TODO: 5. add one to many relationship
     @OneToMany(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
@@ -26,6 +24,11 @@ public class Survey {
     )
 //            @JoinColumn(name = "user_monkey_id",insertable = false, updatable = false)
     private List<UserMonkey> userMonkeys = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id")
+    private Question question;
+
 
     public Survey(long id, String nameOfSurvey) {
         this.id = id;
@@ -48,8 +51,20 @@ public class Survey {
         this.nameOfSurvey = nameOfSurvey;
     }
 
-    // TODO: 5. add one to many relationship
-    public List<Question> getQuestions() {
-        return null;
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public List<UserMonkey> getUserMonkeys() {
+        return userMonkeys;
+    }
+
+    public void setUserMonkeys(List<UserMonkey> userMonkeys) {
+        this.userMonkeys = userMonkeys;
     }
 }

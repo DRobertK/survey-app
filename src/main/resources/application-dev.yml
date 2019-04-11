@@ -1,11 +1,22 @@
-jdbc:
-  url: jdbc:mysql://localhost:3306/certdb
-  username: root
-  password: root
-  driver-class-name: com.mysql.cj.jdbc.Driver
-
-hibernate:
-  dialect: org.hibernate.dialect.MySQL8Dialect
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/surveyDb
+    username: postgres
+    password: islanda
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    show-sql: true
+    hibernate:
+      # will create tables but not database, in testing or production databases, you will want to use the validate option
+      # turn off automatic schema creation to avoid conflicts
+      ddl-auto: create-drop
+      # hibernate 5 default naming strategy
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      # recommended value as the new generators are more efficient and closer to the JPA 2 specification semantic
+      id.new_generator_mappings: true
+    properties.hibernate.format_sql: true
+    properties.hibernate.default_schema: public
 
 # logging properties
 logging:
