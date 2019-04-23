@@ -27,9 +27,6 @@ public class QuestionService {
         return questionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
     }
 
-    public Question update(Question question) {
-        return questionRepository.save(question);
-    }
 
     public void deleteById(long id) {
         questionRepository.deleteById(id);

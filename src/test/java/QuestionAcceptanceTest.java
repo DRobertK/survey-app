@@ -19,7 +19,7 @@ public class QuestionAcceptanceTest {
         Question question = new Question();
         Survey survey = new Survey();
 
-        questionService.add(question);
+//        questionService.add(question);
 
         assertThat(survey.getQuestions()).contains(question);
     }

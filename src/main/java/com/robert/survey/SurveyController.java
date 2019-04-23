@@ -30,8 +30,8 @@ public class SurveyController {
         return surveyService.findAll();
     }
 
-    @GetMapping({"/id"})
-    public Survey findById(Long id) {
+    @GetMapping("/{id}")
+    public Survey findById(@PathVariable Long id) {
         return surveyService.findById(id);
     }
 
@@ -42,8 +42,8 @@ public class SurveyController {
     }
 
     //delete
-    @DeleteMapping({"/id"})
-    public void deleteById(Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
         surveyService.deleteById(id);
     }
 

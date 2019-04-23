@@ -29,8 +29,8 @@ public class QuestionController {
         return questionService.findAll();
     }
 
-    @GetMapping("/id")
-    public Question findById(Long id) {
+    @GetMapping("/{id}")
+    public Question findById(@PathVariable Long id) {
         return questionService.findById(id);
     }
 
@@ -41,8 +41,8 @@ public class QuestionController {
     }
 
     //delete
-    @DeleteMapping({"/id"})
-    public void deleteById(Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
         questionService.deleteById(id);
     }
 }
