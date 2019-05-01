@@ -36,6 +36,7 @@ public class UserMonkey {
         this.country = country;
     }
 
+
     public long getId() {
         return id;
     }

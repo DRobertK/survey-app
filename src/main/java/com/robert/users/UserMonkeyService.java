@@ -2,6 +2,7 @@ package com.robert.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class UserMonkeyService {
         this.userMonkeyRepository = userMonkeyRepository;
     }
 
+    @Transactional
     public UserMonkey save(UserMonkey userMonkey) {
         return userMonkeyRepository.save(userMonkey);
     }
@@ -24,11 +26,7 @@ public class UserMonkeyService {
     }
 
     public UserMonkey findById(Long id) {
-        return userMonkeyRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
-    }
-
-    public UserMonkey update(UserMonkey userMonkey) {
-        return userMonkeyRepository.save(userMonkey);
+        return userMonkeyRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("user not found"));
     }
 
     public void deleteById(Long id) {

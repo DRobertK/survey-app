@@ -12,11 +12,12 @@ import java.time.Period;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/users")
+// TODO: append /api to path
+@RequestMapping(value = "api/users")
 public class UserMonkeyController {
 
     // TODO: 0. add logger and log messages in controller
-    private final static Logger logger = LoggerFactory.getLogger(UserMonkeyController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(UserMonkeyController.class.getName());
 
     private UserMonkeyService userMonkeyService;
 
@@ -26,18 +27,24 @@ public class UserMonkeyController {
     }
 
     //ResponseParam and ResponseEntity
-    @GetMapping("/userInfo")
+    @GetMapping("/userAge")
     ResponseEntity<String> ageUser(
             @RequestParam("yearOfBirth") LocalDate yearOfBirth) {
-        LocalDate curentDate = LocalDate.now();
-        if (Period.between(yearOfBirth, curentDate).getYears() > 0) {
-            return new ResponseEntity<>("You've been born in: " + yearOfBirth
-                    , HttpStatus.OK);
+
+        LocalDate currentDate = LocalDate.now();
+        int age = Period.between(yearOfBirth, currentDate).getYears();
+
+        if (Period.between(yearOfBirth, currentDate).getYears() > 0) {
+            return new ResponseEntity<>("You're age is: " + age, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Wrong value", HttpStatus.BAD_REQUEST);
         }
     }
 
+    @GetMapping("/hello")
+    ResponseEntity<String> hello() {
+        return new ResponseEntity<>("Hello World", HttpStatus.OK);
+    }
 
     // find all
     @GetMapping
@@ -46,7 +53,7 @@ public class UserMonkeyController {
     }
 
     // TODO: 1. fix user CRUD
-    //find one
+    // find one
     @GetMapping("/{id}")
     public UserMonkey findById(@PathVariable final Long id) {
         logger.debug("find by id {}", id);
@@ -66,19 +73,24 @@ public class UserMonkeyController {
     }
 
     // TODO: replace with PATCH
-    @PatchMapping("/usermonkey/{id}")
+    @PatchMapping("/{id}")
     public UserMonkey partialUpdateUserMonkey(@RequestBody UserMonkeyDto userMonkeyDto, @PathVariable Long id) {
 
         UserMonkey userToUpdate = userMonkeyService.findById(id);
-        userToUpdate.setCity(userMonkeyDto.getCity());
-        userToUpdate.setCountry(userMonkeyDto.getCountry());
-        userToUpdate.setEmailAddress(userMonkeyDto.getEmailAddress());
+        map(userToUpdate, userMonkeyDto);
         return userMonkeyService.save(userToUpdate);
     }
 
     // delete
+
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         userMonkeyService.deleteById(id);
+    }
+
+    private void map(UserMonkey user, UserMonkeyDto dto) {
+        user.setCity(dto.getCity());
+        user.setCountry(dto.getCountry());
+        user.setEmailAddress(dto.getEmailAddress());
     }
 }
