@@ -1,4 +1,4 @@
-package com.robert.user;
+package com.robert.user.domain;
 
 import com.robert.survey.Survey;
 
@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "user_monkey")
-public class UserMonkey {
+//
+@Table
+public class User {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +28,10 @@ public class UserMonkey {
     )
     private List<Survey> surveys = new ArrayList<>();
 
-    public UserMonkey() {
+    public User() {
     }
 
-    public UserMonkey(String firstName, String lastName, String emailAddress, String city, String country) {
+    public User(String firstName, String lastName, String emailAddress, String city, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
@@ -97,7 +100,7 @@ public class UserMonkey {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserMonkey that = (UserMonkey) o;
+        User that = (User) o;
         return id == that.id &&
                 firstName.equals(that.firstName) &&
                 lastName.equals(that.lastName) &&

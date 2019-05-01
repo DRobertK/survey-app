@@ -1,14 +1,14 @@
-package com.robert.user;
+package com.robert.user.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserMonkeyRepository extends JpaRepository<UserMonkey, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     // TODO: use spring syntax to find by first name
-    UserMonkey findByFirstName();
+    User findByFirstName();
 
     // TODO: use jpa @Query to find by last name
-    UserMonkey findByLastName();
+    User findByLastName();
 }

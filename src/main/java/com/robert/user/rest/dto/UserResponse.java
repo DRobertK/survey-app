@@ -1,12 +1,11 @@
-package com.robert.user;
+package com.robert.user.rest.dto;
 
-public class UserMonkeyDto {
+public class UserResponse {
 
     private long id;
     private String emailAddress;
     private String city;
     private String country;
-
 
     public long getId() {
         return id;

@@ -1,5 +1,8 @@
-package com.robert.user;
+package com.robert.user.rest;
 
+import com.robert.user.UserService;
+import com.robert.user.domain.User;
+import com.robert.user.rest.dto.UserResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +17,16 @@ import java.util.List;
 @RestController
 // TODO: append /api to path
 @RequestMapping(value = "api/users")
-public class UserMonkeyController {
+public class UserController {
 
     // TODO: 0. add logger and log messages in controller
-    private static final Logger logger = LoggerFactory.getLogger(UserMonkeyController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class.getName());
 
-    private UserMonkeyService userMonkeyService;
+    private UserService userService;
 
     @Autowired
-    public UserMonkeyController(UserMonkeyService userMonkeyService) {
-        this.userMonkeyService = userMonkeyService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     //ResponseParam and ResponseEntity
@@ -48,47 +51,47 @@ public class UserMonkeyController {
 
     // find all
     @GetMapping
-    public List<UserMonkey> findAll() {
-        return userMonkeyService.findAll();
+    public List<User> findAll() {
+        return userService.findAll();
     }
 
     // TODO: 1. fix user CRUD
     // find one
     @GetMapping("/{id}")
-    public UserMonkey findById(@PathVariable final Long id) {
+    public User findById(@PathVariable final Long id) {
         logger.debug("find by id {}", id);
-        return userMonkeyService.findById(id);
+        return userService.findById(id);
     }
 
     // create
     @PostMapping
-    public void create(@RequestBody UserMonkey userMonkey) {
-        userMonkeyService.save(userMonkey);
+    public void create(@RequestBody User user) {
+        userService.save(user);
     }
 
     // update
     @PutMapping
-    public UserMonkey update(@RequestBody UserMonkey userMonkey) {
-        return userMonkeyService.save(userMonkey);
+    public User update(@RequestBody User user) {
+        return userService.save(user);
     }
 
     // TODO: replace with PATCH
     @PatchMapping("/{id}")
-    public UserMonkey partialUpdateUserMonkey(@RequestBody UserMonkeyDto userMonkeyDto, @PathVariable Long id) {
+    public User partialUpdateUserMonkey(@RequestBody UserResponse userResponse, @PathVariable Long id) {
 
-        UserMonkey userToUpdate = userMonkeyService.findById(id);
-        map(userToUpdate, userMonkeyDto);
-        return userMonkeyService.save(userToUpdate);
+        User userToUpdate = userService.findById(id);
+        map(userToUpdate, userResponse);
+        return userService.save(userToUpdate);
     }
 
     // delete
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
-        userMonkeyService.deleteById(id);
+        userService.deleteById(id);
     }
 
-    private void map(UserMonkey user, UserMonkeyDto dto) {
+    private void map(User user, UserResponse dto) {
         user.setCity(dto.getCity());
         user.setCountry(dto.getCountry());
         user.setEmailAddress(dto.getEmailAddress());

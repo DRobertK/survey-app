@@ -1,7 +1,7 @@
 package com.robert;
 
-import com.robert.user.UserMonkey;
-import com.robert.user.UserMonkeyRepository;
+import com.robert.user.domain.User;
+import com.robert.user.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 public class MonkeyApp {
 
     @Autowired
-    private UserMonkeyRepository userMonkeyRepository;
+    private UserRepository userRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(MonkeyApp.class);
@@ -21,8 +21,8 @@ public class MonkeyApp {
     @Bean
     public CommandLineRunner runner() {
         return args -> {
-            userMonkeyRepository.save(
-                    new UserMonkey("gigi", "san",
+            userRepository.save(
+                    new User("gigi", "san",
                             "gigi@gmail.com", "bucharest", "romania"));
         };
     }

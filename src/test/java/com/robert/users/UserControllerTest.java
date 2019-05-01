@@ -1,8 +1,8 @@
 package com.robert.users;
 
-import com.robert.user.UserMonkey;
-import com.robert.user.UserMonkeyController;
-import com.robert.user.UserMonkeyService;
+import com.robert.user.UserService;
+import com.robert.user.domain.User;
+import com.robert.user.rest.UserController;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,16 +24,16 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserMonkeyControllerTest {
+public class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Mock
-    private UserMonkeyService userMonkeyService;
+    private UserService userService;
 
     @InjectMocks
-    private UserMonkeyController controller;
+    private UserController controller;
 
     @Before
     public void setup() {
@@ -43,7 +43,7 @@ public class UserMonkeyControllerTest {
 
     @Test
     public void givenListWithOneUser_whenGetUsers_shouldReturnOk() throws Exception {
-        List<UserMonkey> users = Arrays.asList(new UserMonkey("gigi", "san",
+        List<User> users = Arrays.asList(new User("gigi", "san",
                 "gigi@gmail.com", "bucharest", "romania"));
         Mockito.when(controller.findAll()).thenReturn(users);
 
@@ -53,7 +53,7 @@ public class UserMonkeyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName", Matchers.is("gigi")));
 
-        Mockito.verify(userMonkeyService, Mockito.times(1)).findAll();
+        Mockito.verify(userService, Mockito.times(1)).findAll();
     }
 
     // TODO: unit test the controller methods
