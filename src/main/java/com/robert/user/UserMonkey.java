@@ -1,4 +1,4 @@
-package com.robert.users;
+package com.robert.user;
 
 import com.robert.survey.Survey;
 

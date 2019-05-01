@@ -1,5 +1,8 @@
 package com.robert.users;
 
+import com.robert.user.UserMonkey;
+import com.robert.user.UserMonkeyController;
+import com.robert.user.UserMonkeyService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.robert.users;
+package com.robert.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

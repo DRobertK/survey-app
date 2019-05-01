@@ -1,4 +1,4 @@
-package com.robert.users;
+package com.robert.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

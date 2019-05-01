@@ -1,7 +1,7 @@
 package com.robert;
 
-import com.robert.users.UserMonkey;
-import com.robert.users.UserMonkeyRepository;
+import com.robert.user.UserMonkey;
+import com.robert.user.UserMonkeyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
