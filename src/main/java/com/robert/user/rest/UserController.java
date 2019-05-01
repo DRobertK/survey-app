@@ -6,76 +6,62 @@ import com.robert.user.rest.dto.UserResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
+// FIXME: replace entity with dto
 @RestController
-// TODO: append /api to path
-@RequestMapping(value = "api/users")
+@RequestMapping(UserController.API_USERS)
 public class UserController {
 
-    // TODO: 0. add logger and log messages in controller
+    public static final String API_USERS = "/api/users";
+
+    // FIXME: 0. add logger and log messages in controller
     private static final Logger logger = LoggerFactory.getLogger(UserController.class.getName());
 
     private UserService userService;
 
+    // TODO: inject user service in constructor
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    //ResponseParam and ResponseEntity
-    @GetMapping("/userAge")
-    ResponseEntity<String> ageUser(
-            @RequestParam("yearOfBirth") LocalDate yearOfBirth) {
-
-        LocalDate currentDate = LocalDate.now();
-        int age = Period.between(yearOfBirth, currentDate).getYears();
-
-        if (Period.between(yearOfBirth, currentDate).getYears() > 0) {
-            return new ResponseEntity<>("You're age is: " + age, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Wrong value", HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @GetMapping("/hello")
-    ResponseEntity<String> hello() {
-        return new ResponseEntity<>("Hello World", HttpStatus.OK);
-    }
-
-    // find all
+    // TODO: implement find by id using GET
     @GetMapping
     public List<User> findAll() {
         return userService.findAll();
     }
 
-    // TODO: 1. fix user CRUD
-    // find one
+    // TODO: implement find by id using GET
     @GetMapping("/{id}")
     public User findById(@PathVariable final Long id) {
         logger.debug("find by id {}", id);
         return userService.findById(id);
     }
 
-    // create
+    // TODO: implement create using POST
     @PostMapping
     public void create(@RequestBody User user) {
         userService.save(user);
     }
 
-    // update
+    // TODO: implement update using PUT
     @PutMapping
     public User update(@RequestBody User user) {
         return userService.save(user);
     }
 
-    // TODO: replace with PATCH
+    // TODO: implement partial update using PATCH
     @PatchMapping("/{id}")
     public User partialUpdateUserMonkey(@RequestBody UserResponse userResponse, @PathVariable Long id) {
 
@@ -84,12 +70,14 @@ public class UserController {
         return userService.save(userToUpdate);
     }
 
-    // delete
-
+    // TODO: implement delete using DELETE
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         userService.deleteById(id);
     }
+
+    // FIXME: use @RequestParam for a query param
+    // http://localhost:8080/api/users?lastName=smith
 
     private void map(User user, UserResponse dto) {
         user.setCity(dto.getCity());

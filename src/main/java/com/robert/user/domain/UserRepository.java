@@ -1,14 +1,28 @@
 package com.robert.user.domain;
 
+import com.robert.survey.Survey;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    // TODO: use spring syntax to find by first name
-    User findByFirstName();
+    // FIXME: create custom query using JPQL
+//    @Query
+    List<User> findAllAdminUsers();
 
-    // TODO: use jpa @Query to find by last name
-    User findByLastName();
+    // TODO: create custom native query
+//    @Query
+    List<User> findAllOperatorUsers();
+
+    // TODO: find sorted users
+    @Query
+    List<User> findUsersSorted();
+
+    // TODO: find surveys by user id
+//    @Query
+    List<Survey> findSurveysByUserId();
 }
