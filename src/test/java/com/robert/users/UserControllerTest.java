@@ -3,6 +3,7 @@ package com.robert.users;
 import com.robert.user.UserService;
 import com.robert.user.domain.User;
 import com.robert.user.rest.UserController;
+import com.robert.util.UserFactory;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -43,8 +44,7 @@ public class UserControllerTest {
 
     @Test
     public void givenListWithOneUser_whenGetUsers_shouldReturnOk() throws Exception {
-        List<User> users = Arrays.asList(new User("gigi", "san",
-                "gigi@gmail.com", "bucharest", "romania"));
+        List<User> users = Collections.singletonList(UserFactory.createFullUser());
         Mockito.when(controller.findAll()).thenReturn(users);
 
         mockMvc.perform(get("/users"))

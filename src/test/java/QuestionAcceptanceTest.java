@@ -1,6 +1,6 @@
-import com.robert.question.Question;
 import com.robert.question.QuestionService;
-import com.robert.survey.Survey;
+import com.robert.question.domain.Question;
+import com.robert.survey.domain.Survey;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

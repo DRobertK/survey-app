@@ -1,4 +1,4 @@
-package com.robert.survey;
+package com.robert.survey.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

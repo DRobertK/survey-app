@@ -1,5 +1,7 @@
-package com.robert.survey;
+package com.robert.survey.rest;
 
+import com.robert.survey.SurveyService;
+import com.robert.survey.domain.Survey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

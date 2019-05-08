@@ -1,9 +1,9 @@
-package com.robert.question;
+package com.robert.question.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.robert.survey.domain.Survey;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "question")
 public class Question {
@@ -16,6 +16,10 @@ public class Question {
 
     public Question() {
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "survey_id")
+    Survey survey = new Survey();
 
     public Question(long id, String textQuestion, String textAnswer) {
         this.id = id;
@@ -47,4 +51,18 @@ public class Question {
         this.textAnswer = textAnswer;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Question)) return false;
+        Question question = (Question) o;
+        return id == question.id &&
+                textQuestion.equals(question.textQuestion) &&
+                textAnswer.equals(question.textAnswer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, textQuestion, textAnswer);
+    }
 }

@@ -3,7 +3,7 @@ package com.robert.user.rest.dto;
 public class UserResponse {
 
     private long id;
-    private String emailAddress;
+    private String email;
     private String city;
     private String country;
 
@@ -15,12 +15,12 @@ public class UserResponse {
         this.id = id;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getCity() {

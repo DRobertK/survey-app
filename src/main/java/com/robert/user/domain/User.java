@@ -1,15 +1,9 @@
 package com.robert.user.domain;
 
-import com.robert.survey.Survey;
+import com.robert.survey.domain.Survey;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +19,7 @@ public class User {
 
     // FIXME: add validation
 
-    // FIXME: add fields
+    // TODO: add fields
     /*
         private String username;
         private String email;
@@ -36,17 +30,18 @@ public class User {
     @Column // optional
     private String firstName;
     private String lastName;
-    private String emailAddress;
-    private String city;
-    private String country;
+    private String email;
+    private String username;
+    private String password;
 
-    // FIXME: use temporal field
-//    private LocalDate createdOn;
+    // TODO: use temporal field
+    private LocalDate createdOn;
 
-    // FIXME: use embedded type
-//    private Address address;
+    // TODO: use embedded type
+    @Embedded
+    private Address address;
 
-    // FIXME: use enum fields
+    // TODO: use enum field
     private Role role;
 
     // FetchType.EAGER: default for @ManyToOne and @OneToOne
@@ -57,8 +52,9 @@ public class User {
     // use bidirectional one-to-many
     // use uni-directional many-to-one
     @OneToMany(
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private List<Survey> surveys = new ArrayList<>();
 
@@ -66,14 +62,17 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String emailAddress, String city, String country) {
+    public User(String firstName, String lastName, String email, String username,
+                String password, LocalDate createdOn, Address address, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.city = city;
-        this.country = country;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.createdOn = createdOn;
+        this.address = address;
+        this.role = role;
     }
-
 
     public Long getId() {
         return id;
@@ -99,28 +98,28 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getCity() {
-        return city;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getCountry() {
-        return country;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Survey> getSurveys() {
@@ -131,10 +130,43 @@ public class User {
         this.surveys = surveys;
     }
 
+    public LocalDate getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDate createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     // TODO: add utility methods
     // used to synchronize both side of the bidirectional association
     // addSurvey
+    public void addSurvey(Survey survey) {
+        surveys.add(survey);
+        survey.setUser(this);
+    }
+
     // removeSurvey
+    public void removeSurvey(Survey survey) {
+        surveys.remove(survey);
+        survey.setUser(null);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -144,14 +176,14 @@ public class User {
         return id == that.id &&
                 firstName.equals(that.firstName) &&
                 lastName.equals(that.lastName) &&
-                emailAddress.equals(that.emailAddress) &&
-                city.equals(that.city) &&
-                country.equals(that.country);
+                email.equals(that.email) &&
+                username.equals(that.username) &&
+                password.equals(that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, emailAddress, city, country);
+        return Objects.hash(id, firstName, lastName, email, username, password);
     }
 
     @Override
@@ -160,9 +192,9 @@ public class User {
         return "User{" +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
+                ", emailAddress='" + email + '\'' +
+                ", user='" + username + '\'' +
+                ", country='" + password + '\'' +
                 '}';
 
 

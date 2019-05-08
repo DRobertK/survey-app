@@ -1,5 +1,7 @@
 package com.robert.question;
 
+import com.robert.question.domain.Question;
+import com.robert.question.domain.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

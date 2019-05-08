@@ -6,15 +6,7 @@ import com.robert.user.rest.dto.UserResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -79,9 +71,10 @@ public class UserController {
     // FIXME: use @RequestParam for a query param
     // http://localhost:8080/api/users?lastName=smith
 
+    // FIXME: move this to a mapper
     private void map(User user, UserResponse dto) {
-        user.setCity(dto.getCity());
-        user.setCountry(dto.getCountry());
-        user.setEmailAddress(dto.getEmailAddress());
+        user.setUsername(dto.getCity());
+        user.setPassword(dto.getCountry());
+        user.setEmail(dto.getEmail());
     }
 }
