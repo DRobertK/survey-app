@@ -3,6 +3,9 @@ package com.robert.user.domain;
 import com.robert.survey.domain.Survey;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // FIXME: add validation
+    // TODO: add validation
 
     // TODO: add fields
     /*
@@ -28,10 +31,25 @@ public class User {
         private String lastName;
      */
     @Column // optional
+    @NotNull(message = " First name is a required field")
+    @Size(min = 1, max = 60, message = "First name cannot be longer than 60 characters")
     private String firstName;
+
+    @NotNull(message = " Last name is a required field")
+    @Email(message = "email address should be valid")
+    @Size(min = 1, max = 60, message = "Last name cannot be longer than 60 characters")
     private String lastName;
+
+    @NotNull(message = " email address is a required field")
+    @Size(min = 1, max = 60, message = "email address cannot be longer than 60 characters")
     private String email;
+
+    @NotNull(message = "user name is a required field")
+    @Size(min = 1, max = 60, message = "user name cannot be longer than 60 characters")
     private String username;
+
+    @NotNull(message = "password name is a required field")
+    @Size(min = 1, max = 60, message = "password cannot be longer than 60 characters")
     private String password;
 
     // TODO: use temporal field

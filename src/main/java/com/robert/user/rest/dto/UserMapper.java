@@ -1,5 +1,7 @@
 package com.robert.user.rest.dto;
 
+import com.robert.user.domain.User;
+
 public class UserMapper {
 
     public UserResponse convertToUserResponseFromUserRequest(UserRequest userRequest) {
@@ -20,5 +22,12 @@ public class UserMapper {
         userRequest.setEmail(userResponse.getEmail());
 
         return userRequest;
+    }
+
+    // TODO : move this to a mapper
+    public static void map(User user, UserResponse dto) {
+        user.setUsername(dto.getCity());
+        user.setPassword(dto.getCountry());
+        user.setEmail(dto.getEmail());
     }
 }

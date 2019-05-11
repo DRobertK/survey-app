@@ -19,7 +19,7 @@ public class Question {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "survey_id")
-    Survey survey = new Survey();
+    private Survey survey = new Survey();
 
     public Question(long id, String textQuestion, String textAnswer) {
         this.id = id;
@@ -49,6 +49,14 @@ public class Question {
 
     public void setTextAnswer(String textAnswer) {
         this.textAnswer = textAnswer;
+    }
+
+    public Survey getSurvey() {
+        return survey;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
     }
 
     @Override

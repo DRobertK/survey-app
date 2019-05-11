@@ -4,6 +4,8 @@ import com.robert.question.domain.Question;
 import com.robert.user.domain.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +17,9 @@ public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @Size(min = 1, max = 60)
     private String nameOfSurvey;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -68,6 +73,21 @@ public class Survey {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
+    /// TODO: add utility methods
+    // used to synchronize both side of the bidirectional association
+    // addQuestion
+    public void addQuestion(Question question) {
+        questions.add(question);
+        question.setSurvey(this);
+    }
+
+    //remove question
+    public void removeQuestion(Question question) {
+        questions.remove(question);
+        question.setSurvey(null);
+    }
+
 
     @Override
     public boolean equals(Object o) {
