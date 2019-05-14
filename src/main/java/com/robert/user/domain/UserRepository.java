@@ -13,15 +13,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT u FROM User u WHERE u.role = 0")
     List<User> findAllAdminUsers();
 
-    // TODO: create custom native query
-    @Query(value = "SELECT u FROM User u", nativeQuery = true)
+    // create custom native query
+    @Query(value = "SELECT * FROM user WHERE user.role = 1", nativeQuery = true)
     List<User> findAllOperatorUsers();
 
-    // TODO: find sorted users
+    // find sorted users
     @Query(value = "SELECT u FROM User u ORDER BY name")
     List<User> findUsersSorted();
 
-//    // TODO: find surveys by user id
+//    // find surveys by user id
 //    @Query (value = "SELECT * FROM Survey s ORDER BY id")
 //    List<Survey> findSurveysByUserId();
 }

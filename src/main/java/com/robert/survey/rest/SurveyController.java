@@ -18,7 +18,7 @@ public class SurveyController {
         this.surveyService = surveyService;
     }
 
-    // TODO: 2. add survey CRUD
+    // 2. add survey CRUD
 
     //create
     @PostMapping

@@ -57,4 +57,9 @@ public class UserControllerTest {
     }
 
     // TODO: unit test the controller methods
+//    @Test
+//    public void givenIdUser_whenGetUserById_shouldReturnUser(Long id){
+//       userService.findById(id);
+//      Mockito.verify(userService.findById(id));
+//    }
 }

@@ -12,50 +12,51 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-// FIXME: replace entity with dto
+// TODO: replace entity with dto
 @RestController
 @RequestMapping(UserController.API_USERS)
 public class UserController {
 
     public static final String API_USERS = "/api/users";
 
-    // FIXME: 0. add logger and log messages in controller
+    // 0. add logger and log messages in controller
     private static final Logger logger = LoggerFactory.getLogger(UserController.class.getName());
 
     private UserService userService;
 
-    // TODO: inject user service in constructor
+    // inject user service in constructor
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // TODO: implement find by id using GET
+    // implement find by id using GET
     @GetMapping
+//    @Scope("prototype")
     public List<User> findAll() {
         return userService.findAll();
     }
 
-    // TODO: implement find by id using GET
+    // implement find by id using GET
     @GetMapping("/{id}")
     public User findById(@PathVariable final Long id) {
         logger.debug("find by id {}", id);
         return userService.findById(id);
     }
 
-    // TODO: implement create using POST
+    // implement create using POST
     @PostMapping
     public void create(@RequestBody @Valid User user) {
         userService.save(user);
     }
 
-    // TODO: implement update using PUT
+    // implement update using PUT
     @PutMapping
     public User update(@RequestBody @Valid User user) {
         return userService.save(user);
     }
 
-    // TODO: implement partial update using PATCH
+    // implement partial update using PATCH
     @PatchMapping("/{id}")
     public User partialUpdateUserMonkey(@RequestBody UserResponse userResponse, @PathVariable Long id) {
 
@@ -64,14 +65,23 @@ public class UserController {
         return userService.save(userToUpdate);
     }
 
-    // TODO: implement delete using DELETE
+    // implement delete using DELETE
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         userService.deleteById(id);
     }
 
-    // FIXME: use @RequestParam for a query param
-    // http://localhost:8080/api/users?lastName=smith
-
-
+    // TODO: use @RequestParam for a query param
+    // http://localhost:8080/api/users?firstName=smith
+//    @GetMapping
+//    public void findByName(@RequestParam("firstName") String name) {
+//        for (int i = 0; i < findAll().size(); i++) {
+//            if (findAll().get(i).getFirstName().equals(name)) {
+//                System.out.println("The details of the user " + name);
+//                break;
+//            } else {
+//                System.out.println("User not found");
+//            }
+//        }
+//    }
 }

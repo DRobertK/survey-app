@@ -13,7 +13,7 @@
 //@EnableWebSecurity
 //public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
-//    // TODO: 3. add spring security configuration
+//    // 3. add spring security configuration
 //
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {

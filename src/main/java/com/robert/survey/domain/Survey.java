@@ -13,7 +13,7 @@ import java.util.Objects;
 @Entity(name = "survey")
 public class Survey {
 
-    // TODO: 4. add properties
+    // 4. add properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -26,7 +26,7 @@ public class Survey {
     @JoinColumn(name = "user_id")
     private User user = new User();
 
-    // TODO: 5. add one to many relationship
+    // 5. add one to many relationship
     @OneToMany(
             mappedBy = "survey",
             cascade = CascadeType.ALL,
@@ -74,7 +74,7 @@ public class Survey {
         this.questions = questions;
     }
 
-    /// TODO: add utility methods
+    /// add utility methods
     // used to synchronize both side of the bidirectional association
     // addQuestion
     public void addQuestion(Question question) {

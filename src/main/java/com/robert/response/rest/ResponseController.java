@@ -50,5 +50,4 @@ public class ResponseController {
         responseService.deleteById(id);
     }
 
-
 }

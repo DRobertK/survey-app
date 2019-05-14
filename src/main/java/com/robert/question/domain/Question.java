@@ -1,8 +1,11 @@
 package com.robert.question.domain;
 
+import com.robert.response.domain.Response;
 import com.robert.survey.domain.Survey;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "question")
@@ -20,6 +23,13 @@ public class Question {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "survey_id")
     private Survey survey = new Survey();
+
+    @OneToMany(
+            mappedBy = "question",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Response> responses = new ArrayList<>();
 
     public Question(long id, String textQuestion, String textAnswer) {
         this.id = id;

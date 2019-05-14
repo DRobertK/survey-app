@@ -1,9 +1,9 @@
 package com.robert.user.domain;
 
+import com.robert.response.domain.Response;
 import com.robert.survey.domain.Survey;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -20,9 +20,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TODO: add validation
+    // add validation
 
-    // TODO: add fields
+    // add fields
     /*
         private String username;
         private String email;
@@ -36,7 +36,6 @@ public class User {
     private String firstName;
 
     @NotNull(message = " Last name is a required field")
-    @Email(message = "email address should be valid")
     @Size(min = 1, max = 60, message = "Last name cannot be longer than 60 characters")
     private String lastName;
 
@@ -52,20 +51,20 @@ public class User {
     @Size(min = 1, max = 60, message = "password cannot be longer than 60 characters")
     private String password;
 
-    // TODO: use temporal field
+    // use temporal field
     private LocalDate createdOn;
 
-    // TODO: use embedded type
+    // use embedded type
     @Embedded
     private Address address;
 
-    // TODO: use enum field
+    // use enum field
     private Role role;
 
     // FetchType.EAGER: default for @ManyToOne and @OneToOne
     // FetchType.LAZY: default for @OneToMany and @ManyToMany
 
-    // FIXME: one to many relationship
+    // one to many relationship
     // don't use uni-directional one-to-many
     // use bidirectional one-to-many
     // use uni-directional many-to-one
@@ -75,6 +74,14 @@ public class User {
             orphanRemoval = true
     )
     private List<Survey> surveys = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Response> responses = new ArrayList<>();
+
 
     // needed by hibernate
     public User() {
@@ -172,7 +179,7 @@ public class User {
         this.role = role;
     }
 
-    // TODO: add utility methods
+    // add utility methods
     // used to synchronize both side of the bidirectional association
     // addSurvey
     public void addSurvey(Survey survey) {
