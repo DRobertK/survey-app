@@ -49,4 +49,34 @@ public class UserRepositoryTest {
         userRepository.findAllOperatorUsers();
     }
 
+    @Test
+    public void findAllOperatorAdmin() {
+        User viewer = UserFactory.createFullUser();
+        viewer.setFirstName("gigi");
+        viewer.setRole(Role.VIEWER);
+
+        User admin = UserFactory.createFullUser();
+        admin.setFirstName("alex");
+        admin.setRole(Role.ADMIN);
+
+        userRepository.saveAll(Arrays.asList(admin, viewer));
+        userRepository.findAllAdminUsers();
+    }
+
+    @Test
+    public void findAllAdminUsersSorted() {
+        User viewer = UserFactory.createFullUser();
+        viewer.setFirstName("gigi");
+        viewer.setRole(Role.VIEWER);
+
+        User admin1 = UserFactory.createFullUser();
+        admin1.setFirstName("alex");
+        admin1.setRole(Role.ADMIN);
+
+        User admin2 = UserFactory.createFullUser();
+        admin2.setFirstName("robert");
+        admin2.setRole(Role.ADMIN);
+
+        userRepository.findAdminUsersSorted();
+    }
 }

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class UserFactory {
 
-    private UserFactory() {
+    public UserFactory() {
     }
 
     public static User createFullUser() {

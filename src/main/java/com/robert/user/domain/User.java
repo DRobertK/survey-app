@@ -82,7 +82,6 @@ public class User {
     )
     private List<Response> responses = new ArrayList<>();
 
-
     // needed by hibernate
     public User() {
     }

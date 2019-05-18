@@ -69,6 +69,16 @@ public class Question {
         this.survey = survey;
     }
 
+    public void addResponse(Response response) {
+        responses.add(response);
+        response.setQuestion(this);
+    }
+
+    public void removeResponse(Response response) {
+        responses.remove(response);
+        response.setQuestion(null);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,4 +93,6 @@ public class Question {
     public int hashCode() {
         return Objects.hash(id, textQuestion, textAnswer);
     }
+
+
 }

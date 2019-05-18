@@ -29,12 +29,8 @@ public class QuestionService {
         return questionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
     }
 
-
     public void deleteById(long id) {
         questionRepository.deleteById(id);
     }
 
-//    public void add(Question question) {
-//        questionRepository.save(question);
-//    }
 }

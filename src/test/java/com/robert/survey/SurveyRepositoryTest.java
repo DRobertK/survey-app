@@ -24,4 +24,6 @@ public class SurveyRepositoryTest {
 //        surveyRepository.save(UserFactory.createFullUser());
         assertThat(surveyRepository.count()).isEqualTo(1);
     }
+
+
 }

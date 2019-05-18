@@ -18,10 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAllOperatorUsers();
 
     // find sorted users
-    @Query(value = "SELECT u FROM User u ORDER BY name")
-    List<User> findUsersSorted();
+    @Query(value = "SELECT u FROM User u WHERE u.role = 0 ORDER BY firstName ")
+    List<User> findAdminUsersSorted();
 
-//    // find surveys by user id
-//    @Query (value = "SELECT * FROM Survey s ORDER BY id")
-//    List<Survey> findSurveysByUserId();
 }
