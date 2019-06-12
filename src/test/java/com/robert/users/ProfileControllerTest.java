@@ -1,7 +1,7 @@
 package com.robert.users;
 
 import com.robert.user.UserService;
-import com.robert.user.domain.User;
+import com.robert.user.domain.Profile;
 import com.robert.user.rest.UserController;
 import com.robert.util.UserFactory;
 import org.hamcrest.Matchers;
@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserControllerTest {
+public class ProfileControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -44,8 +44,8 @@ public class UserControllerTest {
 
     @Test
     public void givenListWithOneUser_whenGetUsers_shouldReturnOk() throws Exception {
-        List<User> users = Collections.singletonList(UserFactory.createFullUser());
-        Mockito.when(controller.findAll()).thenReturn(users);
+        List<Profile> profiles = Collections.singletonList(UserFactory.createFullUser());
+        Mockito.when(controller.findAll()).thenReturn(profiles);
 
         mockMvc.perform(get("/users"))
                 .andExpect(MockMvcResultMatchers.status().isOk())

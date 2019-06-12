@@ -1,11 +1,14 @@
 package com.robert.user.rest.dto;
 
+import com.robert.user.domain.Address;
+
 public class UserResponse {
 
     private long id;
     private String email;
-    private String city;
-    private String country;
+    private String firstName;
+    private String lastName;
+    private Address address;
 
     public long getId() {
         return id;
@@ -23,19 +26,27 @@ public class UserResponse {
         this.email = email;
     }
 
-    public String getCity() {
-        return city;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getCountry() {
-        return country;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

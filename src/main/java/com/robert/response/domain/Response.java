@@ -1,7 +1,7 @@
 package com.robert.response.domain;
 
 import com.robert.question.domain.Question;
-import com.robert.user.domain.User;
+import com.robert.user.domain.Profile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,28 +17,27 @@ public class Response {
 
     @Column
     @NotNull
-    private String questionResponse;
-
-    public Response(String questionResponse) {
-        this.questionResponse = questionResponse;
-    }
+    private String answer;
+    // association with user
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private Profile profile = new Profile();
 
     // association with question
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private Question question = new Question();
 
-    // association with user
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user = new User();
-
-    public String getQuestionResponse() {
-        return questionResponse;
+    public Response(String answer) {
+        this.answer = answer;
     }
 
-    public void setQuestionResponse(String questionResponse) {
-        this.questionResponse = questionResponse;
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
 
@@ -51,12 +50,12 @@ public class Response {
     }
 
 
-    public User getUser() {
-        return user;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public Question getQuestion() {

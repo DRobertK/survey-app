@@ -9,16 +9,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class UserRepositoryTest {
+public class ProfileRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    private String firstName1;
+    private String firstName2;
 
     @Test
     public void givenUser_whenCreateUser_thenOk() {
@@ -28,20 +31,20 @@ public class UserRepositoryTest {
 
     @Test
     public void givenAdminUser_whenFindAllAdminUser_thenOk() {
-        User user = UserFactory.createFullUser();
-        user.setRole(Role.ADMIN);
+        Profile profile = UserFactory.createFullUser();
+        profile.setRole(Role.ADMIN);
 
-        userRepository.save(user);
-        assertThat(userRepository.findAllAdminUsers().get(0)).isEqualTo(user);
+        userRepository.save(profile);
+        assertThat(userRepository.findAllAdminUsers().get(0)).isEqualTo(profile);
     }
 
     @Test
     public void findAllOperatorUsers() {
-        User viewer = UserFactory.createFullUser();
+        Profile viewer = UserFactory.createFullUser();
         viewer.setFirstName("gigi");
         viewer.setRole(Role.VIEWER);
 
-        User admin = UserFactory.createFullUser();
+        Profile admin = UserFactory.createFullUser();
         admin.setFirstName("alex");
         admin.setRole(Role.ADMIN);
 
@@ -51,11 +54,11 @@ public class UserRepositoryTest {
 
     @Test
     public void findAllOperatorAdmin() {
-        User viewer = UserFactory.createFullUser();
+        Profile viewer = UserFactory.createFullUser();
         viewer.setFirstName("gigi");
         viewer.setRole(Role.VIEWER);
 
-        User admin = UserFactory.createFullUser();
+        Profile admin = UserFactory.createFullUser();
         admin.setFirstName("alex");
         admin.setRole(Role.ADMIN);
 
@@ -65,18 +68,26 @@ public class UserRepositoryTest {
 
     @Test
     public void findAllAdminUsersSorted() {
-        User viewer = UserFactory.createFullUser();
+        Profile viewer = UserFactory.createFullUser();
         viewer.setFirstName("gigi");
         viewer.setRole(Role.VIEWER);
 
-        User admin1 = UserFactory.createFullUser();
-        admin1.setFirstName("alex");
+        Profile admin1 = UserFactory.createFullUser();
+        String firstName1 = "robert";
+        admin1.setFirstName(firstName1);
         admin1.setRole(Role.ADMIN);
 
-        User admin2 = UserFactory.createFullUser();
-        admin2.setFirstName("robert");
+        Profile admin2 = UserFactory.createFullUser();
+        String firstName2 = "alex";
+        admin2.setFirstName(firstName2);
         admin2.setRole(Role.ADMIN);
 
-        userRepository.findAdminUsersSorted();
+        userRepository.saveAll(Arrays.asList(viewer, admin1, admin2));
+
+        List<Profile> sortedList = userRepository.findAdminUsersSorted();
+
+        assertThat(sortedList.size()).isEqualTo(3);
+        assertThat(sortedList.get(0).getFirstName()).isEqualTo(firstName2);
+        assertThat(sortedList.get(1).getFirstName()).isEqualTo(firstName1);
     }
 }

@@ -1,13 +1,21 @@
 package com.robert.user.rest.dto;
 
-import com.robert.user.domain.User;
+import com.robert.user.domain.Profile;
 
 public class UserMapper {
+
+    // TODO : move this to a mapper
+    public static void map(Profile profile, UserResponse dto) {
+        profile.setEmail(dto.getEmail());
+        profile.setAddress(dto.getAddress());
+        profile.setFirstName(dto.getFirstName());
+        profile.setLastName(dto.getLastName());
+    }
 
     public UserResponse convertToUserResponseFromUserRequest(UserRequest userRequest) {
         UserResponse userResponse = new UserResponse();
 
-        userResponse.setCity(userRequest.getCity());
+        userResponse.setFirstName(userRequest.getCity());
         userRequest.setCountry(userRequest.getCountry());
         userResponse.setEmail(userRequest.getEmail());
 
@@ -17,17 +25,10 @@ public class UserMapper {
     public UserRequest convertToUserRequestFromUserResponse(UserResponse userResponse) {
         UserRequest userRequest = new UserRequest();
 
-        userRequest.setCountry(userResponse.getCountry());
-        userRequest.setCity(userResponse.getCity());
+        userRequest.setCountry(userResponse.getLastName());
+        userRequest.setCity(userResponse.getFirstName());
         userRequest.setEmail(userResponse.getEmail());
 
         return userRequest;
-    }
-
-    // TODO : move this to a mapper
-    public static void map(User user, UserResponse dto) {
-        user.setUsername(dto.getCity());
-        user.setPassword(dto.getCountry());
-        user.setEmail(dto.getEmail());
     }
 }

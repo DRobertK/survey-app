@@ -15,7 +15,6 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String textQuestion;
-    private String textAnswer;
 
     public Question() {
     }
@@ -31,10 +30,9 @@ public class Question {
     )
     private List<Response> responses = new ArrayList<>();
 
-    public Question(long id, String textQuestion, String textAnswer) {
+    public Question(long id, String textQuestion) {
         this.id = id;
         this.textQuestion = textQuestion;
-        this.textAnswer = textAnswer;
     }
 
     public long getId() {
@@ -51,14 +49,6 @@ public class Question {
 
     public void setTextQuestion(String textQuestion) {
         this.textQuestion = textQuestion;
-    }
-
-    public String getTextAnswer() {
-        return textAnswer;
-    }
-
-    public void setTextAnswer(String textAnswer) {
-        this.textAnswer = textAnswer;
     }
 
     public Survey getSurvey() {
@@ -85,13 +75,12 @@ public class Question {
         if (!(o instanceof Question)) return false;
         Question question = (Question) o;
         return id == question.id &&
-                textQuestion.equals(question.textQuestion) &&
-                textAnswer.equals(question.textAnswer);
+                textQuestion.equals(question.textQuestion);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, textQuestion, textAnswer);
+        return Objects.hash(id, textQuestion);
     }
 
 

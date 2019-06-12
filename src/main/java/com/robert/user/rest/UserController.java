@@ -1,7 +1,7 @@
 package com.robert.user.rest;
 
 import com.robert.user.UserService;
-import com.robert.user.domain.User;
+import com.robert.user.domain.Profile;
 import com.robert.user.rest.dto.UserMapper;
 import com.robert.user.rest.dto.UserResponse;
 import org.slf4j.Logger;
@@ -33,36 +33,36 @@ public class UserController {
     // implement find by id using GET
     @GetMapping
 //    @Scope("prototype")
-    public List<User> findAll() {
+    public List<Profile> findAll() {
         return userService.findAll();
     }
 
     // implement find by id using GET
     @GetMapping("/{id}")
-    public User findById(@PathVariable final Long id) {
+    public Profile findById(@PathVariable final Long id) {
         logger.debug("find by id {}", id);
         return userService.findById(id);
     }
 
     // implement create using POST
     @PostMapping
-    public void create(@RequestBody @Valid User user) {
-        userService.save(user);
+    public void create(@RequestBody @Valid Profile profile) {
+        userService.save(profile);
     }
 
     // implement update using PUT
     @PutMapping
-    public User update(@RequestBody @Valid User user) {
-        return userService.save(user);
+    public Profile update(@RequestBody @Valid Profile profile) {
+        return userService.save(profile);
     }
 
     // implement partial update using PATCH
     @PatchMapping("/{id}")
-    public User partialUpdateUserMonkey(@RequestBody UserResponse userResponse, @PathVariable Long id) {
+    public Profile partialUpdateUserMonkey(@RequestBody UserResponse userResponse, @PathVariable Long id) {
 
-        User userToUpdate = userService.findById(id);
-        UserMapper.map(userToUpdate, userResponse);
-        return userService.save(userToUpdate);
+        Profile profileToUpdate = userService.findById(id);
+        UserMapper.map(profileToUpdate, userResponse);
+        return userService.save(profileToUpdate);
     }
 
     // implement delete using DELETE

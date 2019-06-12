@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-public class UserTest {
+public class ProfileTest {
 
     @Test
     public void getId() {

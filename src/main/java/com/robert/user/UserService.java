@@ -1,6 +1,6 @@
 package com.robert.user;
 
-import com.robert.user.domain.User;
+import com.robert.user.domain.Profile;
 import com.robert.user.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,15 +19,15 @@ public class UserService {
     }
 
     @Transactional
-    public User save(User user) {
-        return userRepository.save(user);
+    public Profile save(Profile profile) {
+        return userRepository.save(profile);
     }
 
-    public List<User> findAll() {
+    public List<Profile> findAll() {
         return userRepository.findAll();
     }
 
-    public User findById(Long id) {
+    public Profile findById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("user not found"));
     }
 
