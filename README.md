@@ -1,5 +1,10 @@
-#survey-app
-Web app similar to Survey Monkey created with the purpose of practicing clean code principles in a simple web application and to serve as a playground for research and development. I'm focused on writting code as close as possible to production quality. I will use it as a template for a future microservice architecture.
+# survey-app
+
+  Web app similar to Survey Monkey created with the purpose of practicing clean code principles in a simple web 
+application and to serve as a playground for research and development. 
+I'm focused on writting code as close as possible to production quality. I will use it as a template for a future 
+microservice architecture.
+
 
 Backend
 
