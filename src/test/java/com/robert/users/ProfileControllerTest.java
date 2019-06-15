@@ -44,7 +44,7 @@ public class ProfileControllerTest {
 
     @Test
     public void givenListWithOneUser_whenGetUsers_shouldReturnOk() throws Exception {
-        List<Profile> profiles = Collections.singletonList(UserFactory.createFullUser());
+        List<Profile> profiles = Collections.singletonList(UserFactory.createFullProfile());
         Mockito.when(controller.findAll()).thenReturn(profiles);
 
         mockMvc.perform(get("/users"))

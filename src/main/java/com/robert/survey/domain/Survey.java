@@ -1,7 +1,6 @@
 package com.robert.survey.domain;
 
 import com.robert.question.domain.Question;
-import com.robert.user.domain.Profile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "survey")
+@Entity(name = "Survey")
+@Table(name = "survey")
 public class Survey {
 
     // 4. add properties
@@ -20,26 +20,25 @@ public class Survey {
 
     @NotNull
     @Size(min = 1, max = 60)
-    private String nameOfSurvey;
+    private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private Profile profile = new Profile();
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private Profile profile = new Profile();
 
     // 5. add one to many relationship
     @OneToMany(
             mappedBy = "survey",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+            orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
 
     public Survey() {
     }
 
-    public Survey(long id, String nameOfSurvey) {
+    public Survey(long id, String name) {
         this.id = id;
-        this.nameOfSurvey = nameOfSurvey;
+        this.name = name;
     }
 
     public long getId() {
@@ -50,20 +49,20 @@ public class Survey {
         this.id = id;
     }
 
-    public Profile getProfile() {
-        return profile;
+//    public Profile getProfile() {
+//        return profile;
+//    }
+//
+//    public void setProfile(Profile profile) {
+//        this.profile = profile;
+//    }
+
+    public String getName() {
+        return name;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
-
-    public String getNameOfSurvey() {
-        return nameOfSurvey;
-    }
-
-    public void setNameOfSurvey(String nameOfSurvey) {
-        this.nameOfSurvey = nameOfSurvey;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Question> getQuestions() {
@@ -88,18 +87,17 @@ public class Survey {
         question.setSurvey(null);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Survey)) return false;
         Survey survey = (Survey) o;
         return id == survey.id &&
-                nameOfSurvey.equals(survey.nameOfSurvey);
+                name.equals(survey.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nameOfSurvey);
+        return Objects.hash(id, name);
     }
 }

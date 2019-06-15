@@ -25,14 +25,13 @@ public class ProfileRepositoryTest {
 
     @Test
     public void givenUser_whenCreateUser_thenOk() {
-        userRepository.save(UserFactory.createFullUser());
+        userRepository.save(UserFactory.createFullProfile());
         assertThat(userRepository.count()).isEqualTo(1);
     }
 
     @Test
     public void givenAdminUser_whenFindAllAdminUser_thenOk() {
-        Profile profile = UserFactory.createFullUser();
-        profile.setRole(Role.ADMIN);
+        Profile profile = UserFactory.createFullProfile();
 
         userRepository.save(profile);
         assertThat(userRepository.findAllAdminUsers().get(0)).isEqualTo(profile);
@@ -40,13 +39,11 @@ public class ProfileRepositoryTest {
 
     @Test
     public void findAllOperatorUsers() {
-        Profile viewer = UserFactory.createFullUser();
+        Profile viewer = UserFactory.createFullProfile();
         viewer.setFirstName("gigi");
-        viewer.setRole(Role.VIEWER);
 
-        Profile admin = UserFactory.createFullUser();
+        Profile admin = UserFactory.createFullProfile();
         admin.setFirstName("alex");
-        admin.setRole(Role.ADMIN);
 
         userRepository.saveAll(Arrays.asList(admin, viewer));
         userRepository.findAllOperatorUsers();
@@ -54,13 +51,11 @@ public class ProfileRepositoryTest {
 
     @Test
     public void findAllOperatorAdmin() {
-        Profile viewer = UserFactory.createFullUser();
+        Profile viewer = UserFactory.createFullProfile();
         viewer.setFirstName("gigi");
-        viewer.setRole(Role.VIEWER);
 
-        Profile admin = UserFactory.createFullUser();
+        Profile admin = UserFactory.createFullProfile();
         admin.setFirstName("alex");
-        admin.setRole(Role.ADMIN);
 
         userRepository.saveAll(Arrays.asList(admin, viewer));
         userRepository.findAllAdminUsers();
@@ -68,19 +63,16 @@ public class ProfileRepositoryTest {
 
     @Test
     public void findAllAdminUsersSorted() {
-        Profile viewer = UserFactory.createFullUser();
+        Profile viewer = UserFactory.createFullProfile();
         viewer.setFirstName("gigi");
-        viewer.setRole(Role.VIEWER);
 
-        Profile admin1 = UserFactory.createFullUser();
+        Profile admin1 = UserFactory.createFullProfile();
         String firstName1 = "robert";
         admin1.setFirstName(firstName1);
-        admin1.setRole(Role.ADMIN);
 
-        Profile admin2 = UserFactory.createFullUser();
+        Profile admin2 = UserFactory.createFullProfile();
         String firstName2 = "alex";
         admin2.setFirstName(firstName2);
-        admin2.setRole(Role.ADMIN);
 
         userRepository.saveAll(Arrays.asList(viewer, admin1, admin2));
 

@@ -8,31 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "question")
+@Entity(name = "Question")
+@Table(name = "question")
 public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String textQuestion;
-
-    public Question() {
-    }
+    private String text;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "survey_id")
-    private Survey survey = new Survey();
+    private Survey survey;
 
     @OneToMany(
             mappedBy = "question",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+            orphanRemoval = true)
     private List<Response> responses = new ArrayList<>();
 
-    public Question(long id, String textQuestion) {
+    public Question() {
+    }
+
+    public Question(long id, String text) {
         this.id = id;
-        this.textQuestion = textQuestion;
+        this.text = text;
     }
 
     public long getId() {
@@ -43,12 +43,12 @@ public class Question {
         this.id = id;
     }
 
-    public String getTextQuestion() {
-        return textQuestion;
+    public String getText() {
+        return text;
     }
 
-    public void setTextQuestion(String textQuestion) {
-        this.textQuestion = textQuestion;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Survey getSurvey() {
@@ -75,13 +75,11 @@ public class Question {
         if (!(o instanceof Question)) return false;
         Question question = (Question) o;
         return id == question.id &&
-                textQuestion.equals(question.textQuestion);
+                text.equals(question.text);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, textQuestion);
+        return Objects.hash(id, text);
     }
-
-
 }

@@ -43,12 +43,12 @@ public class Profile {
     // don't use uni-directional one-to-many
     // use bidirectional one-to-many
     // use uni-directional many-to-one
-    @OneToMany(
-            mappedBy = "profile",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Survey> surveys = new ArrayList<>();
+//    @OneToMany(
+//            mappedBy = "profile",
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    private List<Survey> surveys = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "profile",
@@ -108,26 +108,26 @@ public class Profile {
         this.address = address;
     }
 
-    public List<Survey> getSurveys() {
-        return surveys;
-    }
-
-    public void setSurveys(List<Survey> surveys) {
-        this.surveys = surveys;
-    }
+//    public List<Survey> getSurveys() {
+//        return surveys;
+//    }
+//
+//    public void setSurveys(List<Survey> surveys) {
+//        this.surveys = surveys;
+//    }
 
     // add utility methods
     // used to synchronize both side of the bidirectional association
     // addSurvey
     public void addSurvey(Survey survey) {
-        surveys.add(survey);
-        survey.setProfile(this);
+//        surveys.add(survey);
+//        survey.setProfile(this);
     }
 
     // removeSurvey
     public void removeSurvey(Survey survey) {
-        surveys.remove(survey);
-        survey.setProfile(null);
+//        surveys.remove(survey);
+//        survey.setProfile(null);
     }
 
     @Override
@@ -143,6 +143,6 @@ public class Profile {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, address, surveys, responses);
+        return Objects.hash(id, firstName, lastName, email, address, responses);
     }
 }

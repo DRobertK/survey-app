@@ -1,5 +1,8 @@
 package com.robert.survey;
 
+import com.robert.question.domain.Question;
+import com.robert.question.domain.QuestionRepository;
+import com.robert.survey.domain.Survey;
 import com.robert.survey.domain.SurveyRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +22,31 @@ public class SurveyRepositoryTest {
     @Autowired
     private SurveyRepository surveyRepository;
 
+    @Autowired
+    private QuestionRepository questionRepository;
+
+
     @Test
     public void givenSurvey_whenCreateSurvey_thenOk() {
-//        surveyRepository.save(UserFactory.createFullUser());
+        Survey survey = new Survey();
+        survey.setName("Happy test");
+
+        surveyRepository.save(survey);
         assertThat(surveyRepository.count()).isEqualTo(1);
+    }
+
+    // survey with 1 question
+    @Test
+    public void givenSurveyWithQuestion_thenOk() {
+        Survey survey = new Survey();
+        survey.setName("test survey");
+
+        Question question = new Question();
+        question.setText("test question");
+
+        survey.addQuestion(question);
+        surveyRepository.save(survey);
+
+        assertThat(survey).isNotNull();
     }
 }
