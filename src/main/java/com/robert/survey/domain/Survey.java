@@ -1,6 +1,7 @@
 package com.robert.survey.domain;
 
 import com.robert.question.domain.Question;
+import com.robert.user.domain.Profile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,9 +23,9 @@ public class Survey {
     @Size(min = 1, max = 60)
     private String name;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private Profile profile = new Profile();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
+    private Profile profile = new Profile();
 
     // 5. add one to many relationship
     @OneToMany(

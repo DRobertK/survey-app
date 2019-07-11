@@ -5,8 +5,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-@Entity(name = "user_account")
-@Table(name = "user_account")
+@Entity(name = "Account")
+@Table(name = "account")
 public class Account {
 
     @Id
@@ -20,6 +20,10 @@ public class Account {
     @NotNull(message = "password name is a required field")
     @Size(min = 1, max = 60, message = "password cannot be longer than 60 characters")
     private String password;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     // use temporal field
     private LocalDate createdOn;

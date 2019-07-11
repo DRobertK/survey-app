@@ -28,7 +28,7 @@ public class Profile {
     @Size(min = 1, max = 60, message = "Last name cannot be longer than 60 characters")
     private String lastName;
 
-    @NotNull(message = " email address is a required field")
+    @NotNull(message = "email address is a required field")
     @Size(min = 1, max = 60, message = "email address cannot be longer than 60 characters")
     private String email;
 
@@ -43,12 +43,12 @@ public class Profile {
     // don't use uni-directional one-to-many
     // use bidirectional one-to-many
     // use uni-directional many-to-one
-//    @OneToMany(
-//            mappedBy = "profile",
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    private List<Survey> surveys = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "profile",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Survey> surveys = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "profile",
@@ -56,6 +56,14 @@ public class Profile {
             orphanRemoval = true
     )
     private List<Response> responses = new ArrayList<>();
+
+    @OneToOne(mappedBy = "profile",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            optional = false
+
+    )
+    private Account account;
 
     // needed by hibernate
     public Profile() {

@@ -20,7 +20,7 @@ public class Response {
     private String answer;
     // association with user
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "profile_id")
     private Profile profile = new Profile();
 
     // association with question
@@ -39,7 +39,6 @@ public class Response {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-
 
     public Long getId() {
         return id;
